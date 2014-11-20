@@ -157,7 +157,7 @@
     MKCoordinateRegion self_region = self.region;
     
     // Filter invisible (eg. out of visible map rect) annotations, if wanted
-    if(self.clusterInvisibleViews) {
+    if(self.clusterInvisibleViews || !self.clusteringEnabled) {
         annotationsToCluster = [[_allAnnotations allObjects] mutableCopy];
     } else {
         annotationsToCluster = [[self filterAnnotationsForVisibleMap:[_allAnnotations allObjects]] mutableCopy];
