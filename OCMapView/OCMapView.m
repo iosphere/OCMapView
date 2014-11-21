@@ -270,12 +270,13 @@
 {
     NSMutableArray *filteredAnnotations = [[NSMutableArray alloc] initWithCapacity:[annotationsToFilter count]];
     
-    MKCoordinateRegion self_region = self.region;
+    MKMapRect mapRect = self.visibleMapRect;
     
     for (id<MKAnnotation> annotation in annotationsToFilter)
     {
         // if annotation is not inside the coordinates, kick it
-        if(MKCoordinateRegionContainsPoint(self_region, [annotation coordinate])) {
+        MKMapPoint mapPoint = MKMapPointForCoordinate([annotation coordinate]);
+        if(MKMapRectContainsPoint(mapRect, mapPoint)) {
             [filteredAnnotations addObject:annotation];
         }
     }
